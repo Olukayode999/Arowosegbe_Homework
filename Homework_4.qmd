@@ -1,0 +1,119 @@
+---
+title: "Homework_3"
+format: html
+---
+
+Question 1a.
+```{r}
+
+
+x <- 1.1
+a <- 2.2
+b <- 3.3
+
+
+z <- x^(a^b)
+print(z)
+
+
+
+```
+
+Question 1b
+```{r}
+
+z <- (x^a)^b
+print(z)
+
+```
+Question 1c
+```{r}
+
+z <-  3 *(x^3) + 2*(x^2) + 1
+
+print(z)
+
+```
+Question 2a
+```{r}
+my_vec <- seq(1, 8)
+my_vect <- seq(7, 1)
+
+z <- c(my_vec, my_vect)
+print(z)
+
+```
+Question 2b
+```{r}
+#{r}x =seq(0,8)
+
+my_vec <- seq(from =0, to =5)
+
+z <- rep(my_vec, times = (my_vec))
+print(z)
+
+```
+Question 2c
+```{r}
+
+my_vec <- seq(from =5, to = 1)
+
+my_vect <- rep <- seq(from =1, to = 5)
+
+z <- rep(x=my_vec, times= my_vect)
+
+print(z)
+
+
+```
+Question 3
+
+```{r}
+ #using runif to generate two random cart coordinates
+
+ cart <- c(runif(1), runif(2))
+ print(cart)
+
+ #creating r and theta for polar coordinates
+ r <-  sqrt((cart[1] ^2) +(cart[2] ^ 2))
+theta <- atan((cart[1])/ (cart[2])) 
+
+# assigning polar coordinates
+pol <- c(r, theta)
+print(pol)
+
+```
+Question 4
+```{r, echo = TRUE}
+queue <- c("sheep","fox","owl","ant","serpent","donkey","amphid")
+queue[c(1,2,3,4,6,5)]
+queue[c(2,3,4,6,5)]
+queue[c(6,2,3,4,5)]
+queue[c(6,2,3,4)]
+queue[c(6,2,7,4)]
+queue[c(6,2,7,4)]
+
+
+```
+Question 5
+```{r, echo = TRUE}
+
+
+my_vec <- seq(from = 1, to = 100)
+
+a <- (my_vec %% 2 != 0)
+
+b<- (my_vec %% 3 != 0)
+
+ c<- (my_vec %% 7 != 0)
+
+my_vect<- (a & b & c)
+
+
+z <- my_vec[my_vect]
+
+print(z)
+z
+
+```
+

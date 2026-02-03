@@ -1,0 +1,13 @@
+---
+title: "CompBio_Webpage_2026"
+---
+
+This is a Quarto website.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+Adding lines here
+
+[Homework 2](Homework_2.html)
+
+[Homework 3](Homework_4.html)

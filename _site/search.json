@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "Homework 1.html",
+    "href": "Homework 1.html",
+    "title": "Homework 1",
+    "section": "",
+    "text": "homework 1\n\nx &lt;- 1.1\na &lt;- 2.2\nb &lt;- 3.3"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CompBio_Webpage_2026",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\nHomework 1\n[Homework 4] ()"
+  }
+]

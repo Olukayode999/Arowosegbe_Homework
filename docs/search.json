@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CompBio_Webpage_2026",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\nAdding lines here\nHomework 2\nHomework 3"
+  },
+  {
+    "objectID": "Homework 1.html",
+    "href": "Homework 1.html",
+    "title": "Homework_1",
+    "section": "",
+    "text": "homework 1\n\nx &lt;- 1.1\na &lt;- 2.2\nb &lt;- 3.3"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "Homework_4.html",
+    "href": "Homework_4.html",
+    "title": "Homework_3",
+    "section": "",
+    "text": "Question 1a.\n\nx &lt;- 1.1\na &lt;- 2.2\nb &lt;- 3.3\n\n\nz &lt;- x^(a^b)\nprint(z)\n\n[1] 3.61714\n\n\nQuestion 1b\n\nz &lt;- (x^a)^b\nprint(z)\n\n[1] 1.997611\n\n\nQuestion 1c\n\nz &lt;-  3 *(x^3) + 2*(x^2) + 1\n\nprint(z)\n\n[1] 7.413\n\n\nQuestion 2a\n\nmy_vec &lt;- seq(1, 8)\nmy_vect &lt;- seq(7, 1)\n\nz &lt;- c(my_vec, my_vect)\nprint(z)\n\n [1] 1 2 3 4 5 6 7 8 7 6 5 4 3 2 1\n\n\nQuestion 2b\n\n#{r}x =seq(0,8)\n\nmy_vec &lt;- seq(from =0, to =5)\n\nz &lt;- rep(my_vec, times = (my_vec))\nprint(z)\n\n [1] 1 2 2 3 3 3 4 4 4 4 5 5 5 5 5\n\n\nQuestion 2c\n\nmy_vec &lt;- seq(from =5, to = 1)\n\nmy_vect &lt;- rep &lt;- seq(from =1, to = 5)\n\nz &lt;- rep(x=my_vec, times= my_vect)\n\nprint(z)\n\n [1] 5 4 4 3 3 3 2 2 2 2 1 1 1 1 1\n\n\nQuestion 3\n\n #using runif to generate two random cart coordinates\n\n cart &lt;- c(runif(1), runif(2))\n print(cart)\n\n[1] 0.7987494 0.3469659 0.7048333\n\n #creating r and theta for polar coordinates\n r &lt;-  sqrt((cart[1] ^2) +(cart[2] ^ 2))\ntheta &lt;- atan((cart[1])/ (cart[2])) \n\n# assigning polar coordinates\npol &lt;- c(r, theta)\nprint(pol)\n\n[1] 0.8708536 1.1610022\n\n\nQuestion 4\n\nqueue &lt;- c(\"sheep\",\"fox\",\"owl\",\"ant\",\"serpent\",\"donkey\",\"amphid\")\nqueue[c(1,2,3,4,6,5)]\n\n[1] \"sheep\"   \"fox\"     \"owl\"     \"ant\"     \"donkey\"  \"serpent\"\n\nqueue[c(2,3,4,6,5)]\n\n[1] \"fox\"     \"owl\"     \"ant\"     \"donkey\"  \"serpent\"\n\nqueue[c(6,2,3,4,5)]\n\n[1] \"donkey\"  \"fox\"     \"owl\"     \"ant\"     \"serpent\"\n\nqueue[c(6,2,3,4)]\n\n[1] \"donkey\" \"fox\"    \"owl\"    \"ant\"   \n\nqueue[c(6,2,7,4)]\n\n[1] \"donkey\" \"fox\"    \"amphid\" \"ant\"   \n\nqueue[c(6,2,7,4)]\n\n[1] \"donkey\" \"fox\"    \"amphid\" \"ant\"   \n\n\nQuestion 5\n\nmy_vec &lt;- seq(from = 1, to = 100)\n\na &lt;- (my_vec %% 2 != 0)\n\nb&lt;- (my_vec %% 3 != 0)\n\n c&lt;- (my_vec %% 7 != 0)\n\nmy_vect&lt;- (a & b & c)\n\n\nz &lt;- my_vec[my_vect]\n\nprint(z)\n\n [1]  1  5 11 13 17 19 23 25 29 31 37 41 43 47 53 55 59 61 65 67 71 73 79 83 85\n[26] 89 95 97\n\nz\n\n [1]  1  5 11 13 17 19 23 25 29 31 37 41 43 47 53 55 59 61 65 67 71 73 79 83 85\n[26] 89 95 97"
+  }
+]
