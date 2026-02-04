@@ -6,12 +6,12 @@ format: html
 Question 1a.
 ```{r}
 
-
+# assigning a numeric value to x, a and b
 x <- 1.1
 a <- 2.2
 b <- 3.3
 
-
+#combining the variables and assigning them to z
 z <- x^(a^b)
 print(z)
 
@@ -21,14 +21,14 @@ print(z)
 
 Question 1b
 ```{r}
-
+#raising x to the power of a and raising the result to the power of b
 z <- (x^a)^b
 print(z)
 
 ```
 Question 1c
 ```{r}
-
+# multiply three by x raised to the power of three plus  two multiplied by x raised to the power of 2 plus 1
 z <-  3 *(x^3) + 2*(x^2) + 1
 
 print(z)
@@ -36,30 +36,40 @@ print(z)
 ```
 Question 2a
 ```{r}
+
+# creating a sequence of numbers from 1 up to 8 and another one counting down from 7 to 1
 my_vec <- seq(1, 8)
 my_vect <- seq(7, 1)
 
+# combining both sequences into one single vector
 z <- c(my_vec, my_vect)
 print(z)
 
 ```
 Question 2b
 ```{r}
-#{r}x =seq(0,8)
+# creating a sequence of numbers starting from 0 up to 8
+x =seq(0,8)
+
+# Assigning my_vec to a sequence of numbers from 0 to 5
 
 my_vec <- seq(from =0, to =5)
 
+# Repeating each element of my_vec a number of times equal to its value
 z <- rep(my_vec, times = (my_vec))
 print(z)
 
 ```
 Question 2c
 ```{r}
+# Assigning my_vec t0 a sequence of numbers from 5 down to 1
 
 my_vec <- seq(from =5, to = 1)
 
-my_vect <- rep <- seq(from =1, to = 5)
+# Assigning my_vect t0 a sequence of numbers from 1 to 5
+my_vect <- seq(from = 1, to = 5)
 
+# Repeating each element of 'my_vec' a number of times specified by 'my_vect'
 z <- rep(x=my_vec, times= my_vect)
 
 print(z)
@@ -85,31 +95,41 @@ print(pol)
 ```
 Question 4
 ```{r, echo = TRUE}
+# Creating a vector called 'queue' containing names of animals
 queue <- c("sheep","fox","owl","ant","serpent","donkey","amphid")
+# the serpent arrives and gets in line
 queue[c(1,2,3,4,6,5)]
+#the sheep enters the ark
 queue[c(2,3,4,6,5)]
+#the donkey arrives and talks his way to the front of the line
 queue[c(6,2,3,4,5)]
+#the serpent gets impatient and leaves
 queue[c(6,2,3,4)]
+#the owl gets bored and leaves
 queue[c(6,2,7,4)]
+#the aphid arrives and the ant invites him to cut in line
 queue[c(6,2,7,4)]
-
+#the position of the amphid in the line
+position <- which(queue == "amphid")
+print(position)
 
 ```
 Question 5
 ```{r, echo = TRUE}
 
+#Assigning my_vector to a sequence from 1 to 100
 
 my_vec <- seq(from = 1, to = 100)
-
+# creating logical vectors that is false for numbers divisible by 2, 3 and 7
 a <- (my_vec %% 2 != 0)
 
 b<- (my_vec %% 3 != 0)
 
  c<- (my_vec %% 7 != 0)
-
+# Combining the three logical vectors 
 my_vect<- (a & b & c)
 
-
+#Using the logical vector 'my_vect' to index 'my_vec'
 z <- my_vec[my_vect]
 
 print(z)
