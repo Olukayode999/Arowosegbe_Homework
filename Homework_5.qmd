@@ -79,6 +79,8 @@ typeof(new_vec)
 
 
 ```
+
+
 QUestion 3
 ```{r}
 #Create a data frame with the two variables (= columns) and 26 cases (= rows) below
