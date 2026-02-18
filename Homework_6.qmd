@@ -1,0 +1,105 @@
+---
+title: "homework 5"
+format: html
+---
+
+ ```{r}
+############################################################
+# FUNCTION: logistic_growth_model
+# This function calculates population size through time
+# using the analyticalsolution to the
+# logistic growth equation.
+#
+# INPUTS
+# N0     : initial population size
+# r      : intrinsic growth rate
+# K      : carrying capacity
+# tfinal : final time for timevector
+# tstep  : size of the time step
+#
+# OUTPUT
+# A dataframe containing time values and population values
+
+#logistic_growth_model <- function(PS, K, r, tfinal, tstep) {
+  
+  
+  # Creating the time vector by generating a sequence of time points starting and ending at tfinal, increasing by tstep each time
+ # time_vector <- seq(from = 0,
+                     to   = tfinal,
+                     by   = tstep)
+  
+  
+
+  # PREPARING STORAGE FOR POPULATION VALUES
+  
+  # Determine how many time points exist
+  #number_of_points <- length(time_vector)
+  
+  # Creating an empty numeric vector to hold population values
+  #population_vector <- numeric(number_of_points)
+  
+  
+  
+  # CALCULATING THE CONSTANT TERM USED IN EQUATION
+ 
+  
+  # (K - N0) / N0 appears repeatedly in the logistic formula
+  #constant_term <- (K - N0) / N0
+  
+  
+  # CALCULATING POPULATION SIZE FOR EACH TIME VALUE
+ 
+  
+  # Using a loop so each step is explicit and easy to follow
+  for(i in 1:number_of_points) {
+    
+    # Extracting the current time value
+    current_time <- time_vector[i]
+    
+    # Calculating the exponential portion of the formula
+    exponential_part <- exp(-K * current_time)
+    
+    # Calculating the denominator of the logistic equation
+    denominator <- 1 + constant_term * exponential_part
+    
+    # Calculating population size at this time
+    Nt <- K / denominator
+    
+    # Storing the result
+    population_vector[i] <- Nt
+  }
+  
+  
+  # Creating DATAFRAME FOR OUTPUT
+
+  
+ output_dataframe <- data.frame(
+    time = time_vector,
+    population = population_vector
+  )
+  
+  
+  # RETURNING RESULT
+
+  
+  return(output_dataframe)
+}
+
+result <- logistic_growth_model(N0 = 10,
+                                r = 0.9,
+                                K = 10,
+                                tfinal = 10,
+                                tstep = 0.5)
+
+head(result)
+
+
+plot(result$time,
+     result$population,
+     type = "l",
+     xlab = "Time",
+     ylab = "Population Size",
+     main = "Logistic Growth (Analytical)"))
+
+
+ ```

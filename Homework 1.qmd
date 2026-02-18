@@ -9,4 +9,238 @@ x <- 1.1
 a <- 2.2
 b <- 3.3
 
-```
+
+#lists, Matrices, and Data Frames
+# Olukayode Arowosegbe
+#29 Jan. 2026
+
+######################################################
+
+#creating a mat from a vector
+
+my_vec <- 1 :12
+
+# numbers by rows
+m<- matrix(data = my_vec, nrow = 4)
+m
+
+# by filling the matrix the other way
+m <- matrix(data = my_vec, ncol =3, byrow = T)
+m
+
+
+#lists:
+my_list <- list(1:10, matrix(1:8, nrow = 4, byrow =T), letters[1:3], pi)
+print(my_list)
+
+#indexing a list  
+x <- (my_list[1]) # double brackets for object within list element
+str(x)
+
+#indexing into a matrix
+my_list[[2]] [1,2] #rows, cols
+
+#naming lists
+
+my_list2 <- list(tester=FALSE, little_m = matrix(1:9, nrow =3))
+my_list2
+
+#named objects in lists:
+my_list2$little_m[2,3]
+
+#looking at empty place indexing
+my_list2$little_m[,1]
+my_list2$little_m[,1] #no comma, its treated as a vector and you wont get the row and column
+
+#unlist
+unrolled <- unlist(my_list2)
+unrolled[1]
+
+
+#installling packages is install.packages("ggplot2")
+#unpacking complex lists
+library(ggplot2)
+#create some random vars
+
+y_var <- runif(10)
+x_var <- runif(10)
+#regress
+my_model <- lm(y_var~x_var)
+
+#plot it 
+
+qplot (x=x_var, y=y_var)
+print(my_model)
+
+#explore structure
+str(summary(my_model))
+
+summary(my_model) $coefficient["x_var", "Pr(>|t|)"]
+
+u <- unlist(summary(my_model))
+print(u)
+
+pval <- u$coefficients8
+pval
+
+#data frames
+
+var_a <- 1:12
+var_b <- rep(c("A",  "B", "C"), 4)
+var_c <- runif(12)
+
+#creating a data frame from vecs
+df <- data.frame(var_a, var_b, var_c)
+ str(df)
+df$var_b
+
+df$var_a[1]
+
+#expanding the data frame
+
+new_data <- list(var_a = 13, var_b = "D", var_c = 0.77)
+
+#appending data
+
+df2 <- rbind(df, new_data)
+
+head(df2, 10)
+
+view(df2) #looking at data frames in the viewer
+
+#add a new column to a df
+df2
+ 
+#using cbind
+new_var <- rnorm(13)
+df3 <- cbind (df2, new_var)
+
+#using assignment operator
+c
+_var <- rep ("T", 13)
+df3$charV <- char_var
+head(df3)
+
+#writing data frames
+write.csv(df3, "data/my_dataframe.csv")
+
+
+getwd()
+
+data <- read.csv(df3, "data/my_dataframe.csv", HEADER = TRUE)
+data$var_a
+
+
+# Distinctions between DFs and Mat Dims
+
+z_mat <- matrix(data = 1:30, ncol =3, byrow = T)
+
+z_dframe <-  as.data.frame(z_mat) # turn into DF
+
+str(z_mat)
+str(z_dframe)
+head(z_mat)
+
+z_mat[2, 2]
+
+z_dframe$V2[2] #correct for a DF
+# column ref
+
+z_dframe[,3]
+z_mat[,3]
+
+#one dimension referencing
+z_mat[2]
+z_dframe[2]
+
+#missing data in DFs and Mats
+
+zd <-  runif(10)
+
+zd[c(5,7)] <- NA
+print(zd)
+
+#complete cases
+complete.cases(zd)
+#filter for only TRUE
+
+zd[complete.cases(zd)]
+
+#which positions are missing?
+which(!complete.cases(zd))
+
+#missing data in a matrix
+m <- matrix(1:20, nrow = 5)
+print(m)
+
+#add missing data
+m[1,1] <-  NA
+m[5,4] <- NA
+
+m[complete.cases(m),]
+
+m[,complete.cases(m),]
+
+#now get complete cases for onlt certain columns!
+
+m[complete.cases(m[,c(1,2)]),] # drops first row
+
+m[complete.cases(m[,c(2,3)]),] # no drops
+m[complete.cases(m[,c(3,4)]),] #drops row 4
+m[complete.cases(m[,c(1,4)]),] # drops 1 & 4
+
+#Subsetting mats and data frames
+m <- matrix(data=1:12, nrow = 3)
+dimnames(m) <- list(paste("Species", LETTERS[1:nrow(m)], sep =""), paste("site", 1:ncol(m),sep""))
+list()
+print(m)
+
+#elementy-wise subsetting
+
+m[1:2, 3:4]
+m[c("speciesA", "SpeciesB"), c("Site3", "Site4")]
+
+m[1:2,]
+m[, 3:4]
+
+#using logical for subsetting
+colSums(m)[colSums(m) > 15]
+sums <- colSums(m) # create sums
+
+sums [sums > 15]
+
+rowSums(m)
+
+m[!rowSums(m) ==22, ]
+
+m[, "Site1"]
+
+m[, "Site1"]<3
+
+#data curation
+
+#my_data <- read.table(file= "data/testData.csv",header = TRUE, sep ="," comment.char="#" )
+head(my_data)
+
+saveRDS(z_dframe, file ="data/zData.RDS") # RDS suffix is not required, but google
+
+z_dframe
+
+#using the RDS reader
+
+unfrozen_Z <-  readRDS("data/zData.RDS")
+
+unfrozen_Z
+
+
+
+#########################################################
+05/02/2026
+
+
+
+###my_function <-  function(x=1, y=2){
+                                      out <- x +y
+                                      out =y/z
+                                     z <- list(out, out) 
+                                     return(z)}

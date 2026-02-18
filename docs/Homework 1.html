@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -104,6 +69,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -150,6 +144,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#homework-1" id="toc-homework-1" class="nav-link active" data-scroll-target="#homework-1">homework 1</a></li>
+  <li><a href="#numbers-by-rows" id="toc-numbers-by-rows" class="nav-link" data-scroll-target="#numbers-by-rows">numbers by rows</a></li>
+  <li><a href="#by-filling-the-matrix-the-other-way" id="toc-by-filling-the-matrix-the-other-way" class="nav-link" data-scroll-target="#by-filling-the-matrix-the-other-way">by filling the matrix the other way</a></li>
+  <li><a href="#distinctions-between-dfs-and-mat-dims" id="toc-distinctions-between-dfs-and-mat-dims" class="nav-link" data-scroll-target="#distinctions-between-dfs-and-mat-dims">Distinctions between DFs and Mat Dims</a></li>
   </ul>
 </nav>
     </div>
@@ -177,13 +174,102 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="homework-1" class="level1">
 <h1>homework 1</h1>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fl">1.1</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fl">2.2</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fl">3.3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<p>x &lt;- 1.1 a &lt;- 2.2 b &lt;- 3.3</p>
+<p>#lists, Matrices, and Data Frames # Olukayode Arowosegbe #29 Jan.&nbsp;2026</p>
+<section id="section" class="level54">
+<p class="heading"></p>
+<p>#creating a mat from a vector</p>
+<p>my_vec &lt;- 1 :12</p>
+</section>
+</section>
+<section id="numbers-by-rows" class="level1">
+<h1>numbers by rows</h1>
+<p>m&lt;- matrix(data = my_vec, nrow = 4) m</p>
+</section>
+<section id="by-filling-the-matrix-the-other-way" class="level1">
+<h1>by filling the matrix the other way</h1>
+<p>m &lt;- matrix(data = my_vec, ncol =3, byrow = T) m</p>
+<p>#lists: my_list &lt;- list(1:10, matrix(1:8, nrow = 4, byrow =T), letters[1:3], pi) print(my_list)</p>
+<p>#indexing a list<br>
+x &lt;- (my_list[1]) # double brackets for object within list element str(x)</p>
+<p>#indexing into a matrix my_list[[2]] [1,2] #rows, cols</p>
+<p>#naming lists</p>
+<p>my_list2 &lt;- list(tester=FALSE, little_m = matrix(1:9, nrow =3)) my_list2</p>
+<p>#named objects in lists: my_list2$little_m[2,3]</p>
+<p>#looking at empty place indexing my_list2<span class="math inline">\(little_m[,1]
+my_list2\)</span>little_m[,1] #no comma, its treated as a vector and you wont get the row and column</p>
+<p>#unlist unrolled &lt;- unlist(my_list2) unrolled[1]</p>
+<p>#installling packages is install.packages(“ggplot2”) #unpacking complex lists library(ggplot2) #create some random vars</p>
+<p>y_var &lt;- runif(10) x_var &lt;- runif(10) #regress my_model &lt;- lm(y_var~x_var)</p>
+<p>#plot it</p>
+<p>qplot (x=x_var, y=y_var) print(my_model)</p>
+<p>#explore structure str(summary(my_model))</p>
+<p>summary(my_model) $coefficient[“x_var”, “Pr(&gt;|t|)”]</p>
+<p>u &lt;- unlist(summary(my_model)) print(u)</p>
+<p>pval &lt;- u$coefficients8 pval</p>
+<p>#data frames</p>
+<p>var_a &lt;- 1:12 var_b &lt;- rep(c(“A”, “B”, “C”), 4) var_c &lt;- runif(12)</p>
+<p>#creating a data frame from vecs df &lt;- data.frame(var_a, var_b, var_c) str(df) df$var_b</p>
+<p>df$var_a[1]</p>
+<p>#expanding the data frame</p>
+<p>new_data &lt;- list(var_a = 13, var_b = “D”, var_c = 0.77)</p>
+<p>#appending data</p>
+<p>df2 &lt;- rbind(df, new_data)</p>
+<p>head(df2, 10)</p>
+<p>view(df2) #looking at data frames in the viewer</p>
+<p>#add a new column to a df df2</p>
+<p>#using cbind new_var &lt;- rnorm(13) df3 &lt;- cbind (df2, new_var)</p>
+<p>#using assignment operator c _var &lt;- rep (“T”, 13) df3$charV &lt;- char_var head(df3)</p>
+<p>#writing data frames write.csv(df3, “data/my_dataframe.csv”)</p>
+<p>getwd()</p>
+<p>data &lt;- read.csv(df3, “data/my_dataframe.csv”, HEADER = TRUE) data$var_a</p>
+</section>
+<section id="distinctions-between-dfs-and-mat-dims" class="level1">
+<h1>Distinctions between DFs and Mat Dims</h1>
+<p>z_mat &lt;- matrix(data = 1:30, ncol =3, byrow = T)</p>
+<p>z_dframe &lt;- as.data.frame(z_mat) # turn into DF</p>
+<p>str(z_mat) str(z_dframe) head(z_mat)</p>
+<p>z_mat[2, 2]</p>
+<p>z_dframe$V2[2] #correct for a DF # column ref</p>
+<p>z_dframe[,3] z_mat[,3]</p>
+<p>#one dimension referencing z_mat[2] z_dframe[2]</p>
+<p>#missing data in DFs and Mats</p>
+<p>zd &lt;- runif(10)</p>
+<p>zd[c(5,7)] &lt;- NA print(zd)</p>
+<p>#complete cases complete.cases(zd) #filter for only TRUE</p>
+<p>zd[complete.cases(zd)]</p>
+<p>#which positions are missing? which(!complete.cases(zd))</p>
+<p>#missing data in a matrix m &lt;- matrix(1:20, nrow = 5) print(m)</p>
+<p>#add missing data m[1,1] &lt;- NA m[5,4] &lt;- NA</p>
+<p>m[complete.cases(m),]</p>
+<p>m[,complete.cases(m),]</p>
+<p>#now get complete cases for onlt certain columns!</p>
+<p>m[complete.cases(m[,c(1,2)]),] # drops first row</p>
+<p>m[complete.cases(m[,c(2,3)]),] # no drops m[complete.cases(m[,c(3,4)]),] #drops row 4 m[complete.cases(m[,c(1,4)]),] # drops 1 &amp; 4</p>
+<p>#Subsetting mats and data frames m &lt;- matrix(data=1:12, nrow = 3) dimnames(m) &lt;- list(paste(“Species”, LETTERS[1:nrow(m)], sep =““), paste(”site”, 1:ncol(m),sep”“)) list() print(m)</p>
+<p>#elementy-wise subsetting</p>
+<p>m[1:2, 3:4] m[c(“speciesA”, “SpeciesB”), c(“Site3”, “Site4”)]</p>
+<p>m[1:2,] m[, 3:4]</p>
+<p>#using logical for subsetting colSums(m)[colSums(m) &gt; 15] sums &lt;- colSums(m) # create sums</p>
+<p>sums [sums &gt; 15]</p>
+<p>rowSums(m)</p>
+<p>m[!rowSums(m) ==22, ]</p>
+<p>m[, “Site1”]</p>
+<p>m[, “Site1”]&lt;3</p>
+<p>#data curation</p>
+<p>#my_data &lt;- read.table(file= “data/testData.csv”,header = TRUE, sep =“,” comment.char=“#” ) head(my_data)</p>
+<p>saveRDS(z_dframe, file =“data/zData.RDS”) # RDS suffix is not required, but google</p>
+<p>z_dframe</p>
+<p>#using the RDS reader</p>
+<p>unfrozen_Z &lt;- readRDS(“data/zData.RDS”)</p>
+<p>unfrozen_Z</p>
+<section id="section-1" class="level57">
+<p class="heading"></p>
+<p>05/02/2026</p>
+<p>###my_function &lt;- function(x=1, y=2){ out &lt;- x +y out =y/z z &lt;- list(out, out) return(z)}</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
