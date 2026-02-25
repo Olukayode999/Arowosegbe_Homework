@@ -1,0 +1,56 @@
+---
+title: "Homework 5"
+format: html
+---
+
+Question 1
+```{r}
+#Creating a function that takes the parameters required to run a logistic growth model and returns a dataframe with columns for population size and time.
+# Inputs: N0 = initial population size
+# r = intrinsic growth rate 
+# K = carrying capacity
+# tfinal = ending time for simulation
+# tstep  = time step increment
+# Output: A dataframe with any time between 1:100 with intervals of 5
+# popsize = population size at each time
+#########################################################################
+
+
+log_growth <- function(N0=40, r=0.1, K=100, tfinal=100, tstep=5) {
+# time sequence from 0 to tfinal by tstep
+times <- seq(from=0, to=tfinal, by=tstep)
+  
+# logistic growth equation
+
+popsize <- K / (1 + ((K - N0) / N0) * exp(-r * times))
+  
+# dataframe for plotting
+df_loggrowth <- data.frame(times=times, popsize=popsize)
+# return the dataframe
+return(df_loggrowth)
+
+}
+log_growth()
+
+
+
+```
+
+```{r}
+# Create a function and a plot of time as the x-axis and population as the y-axis and take the data frame log_growth
+plot_log_growth <- function(df_loggrowth) {
+  plot(x = df_loggrowth$time,
+       y = df_loggrowth$popsize,
+       main = "Logistic growth model",
+       xlab = "Time in years",
+       ylab = "Population size",
+       type = "l")
+}
+
+df <- log_growth()
+plot_log_growth(df)
+
+```
+
+
+
