@@ -1,0 +1,69 @@
+---
+title: "Homework_7"
+format: html
+---
+
+```{r}
+library(tidyverse)
+
+# Examine the structure
+glimpse(iris)
+str(iris)
+dim(iris)
+
+# Check dimensions
+head(iris)
+iris1 <- iris %>%
+  filter(Species %in% c("virginica", "versicolor"),
+         Sepal.Length > 6,
+         Sepal.Width > 2.5)
+dim(iris1)
+
+iris2 <- select(iris1,
+                Species,
+                Sepal.Length,
+                Sepal.Width)
+
+dim(iris2)
+
+iris3 <- arrange(iris2, desc(Sepal.Length))
+
+head(iris3)
+
+iris4 <- mutate(iris3,
+                Sepal.Area = Sepal.Length * Sepal.Width)
+
+dim(iris4)
+
+iris5 <- summarize(iris4,
+                   avg_sepal_length = mean(Sepal.Length),
+                   avg_sepal_width = mean(Sepal.Width),
+                   sample_size = n())
+
+iris5
+iris6 <- iris4 %>%
+  group_by(Species) %>%
+  summarize(avg_sepal_length = mean(Sepal.Length),
+            avg_sepal_width = mean(Sepal.Width),
+            sample_size = n())
+
+iris6
+
+irisFinal <- iris %>%
+  filter(Species %in% c("virginica","versicolor"),
+         Sepal.Length > 6,
+         Sepal.Width > 2.5) %>%
+  select(Species, Sepal.Length, Sepal.Width) %>%
+  arrange(desc(Sepal.Length)) %>%
+  mutate(Sepal.Area = Sepal.Length * Sepal.Width)
+
+irisFinal
+
+iris_long <- iris %>%
+  pivot_longer(cols = c(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width),
+               names_to = "Measure",
+               values_to = "Value") %>%
+  select(Species, Measure, Value)
+
+head(iris_long)
+```

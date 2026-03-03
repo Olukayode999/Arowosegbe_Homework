@@ -6,7 +6,7 @@ format: html
 Question 1
 ```{r}
 #Creating a function that takes the parameters required to run a logistic growth model and returns a dataframe with columns for population size and time.
-# Inputs: N0 = initial population size
+# Inputs: N0 = initial population size.
 # r = intrinsic growth rate 
 # K = carrying capacity
 # tfinal = ending time for simulation
