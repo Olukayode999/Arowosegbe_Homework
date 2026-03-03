@@ -8,7 +8,7 @@ Question 1
 library(deSolve)
 
 
-############################################################
+#####################################################
 # FUNCTION: run_sir_model
 # PURPOSE: Solve deterministic SIR model with deSolve
 # INPUTS:
@@ -20,7 +20,7 @@ library(deSolve)
 #   dt          : timestep
 # OUTPUT:
 #   data.frame with columns: time, S, I, R
-############################################################
+##########################################
 # The function below solves the SIR model for a single parameter set and will be used inside your loops to conduct the parameter sweep.
 
 run_sir_model <- function(
@@ -57,7 +57,7 @@ run_sir_model <- function(
   as.data.frame(out)
 }
 
-#################################################################
+##############################################################
 # END FUNCTION
 ```
 
@@ -79,16 +79,16 @@ sir_param_sweep <- function(
     gamma_params
 ){
     
-    ### Creating storage df:
-    # finding the length of the df
+    ##### Creating storage df:
+    ## finding the length of the df
     df <- length(beta_params)*length(gamma_params)
 
-    # creating each column in the df
+    ## creating each column in the df
     beta_out <- rep(NA, df)
     gamma_out <- rep(NA, df)
     max_infected <- rep(NA, df)
 
-    # creating the df
+    ## creating the df
     storage_df <- data.frame(beta_out, gamma_out, max_infected)
 
     counter <- 1
@@ -134,7 +134,7 @@ plot_param_sweep <- function(
     ggplot(param_df, aes(x = beta_out, y = gamma_out, fill = max_infected)) + geom_tile() + xlab("Transmission Rate, Beta") + ylab("Recovery Rate, Gamma") + labs(fill = "Max Infected")
 }
 
-plot_param_sweep(tesparam_sweep)
+plot_param_sweep(testparam_sweep)
 
 
 ```
