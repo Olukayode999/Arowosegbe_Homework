@@ -19,4 +19,4 @@ Adding lines here
 [Homework 6](Homework_7.html)
 
 
-[Homework7](Homework_8.html)
+[Homework 7](Homework_8.html)
