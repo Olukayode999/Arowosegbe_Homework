@@ -1,0 +1,64 @@
+---
+title: "Homework 9"
+format: html
+---
+```{r}
+# Loading the ggplot2 library
+library(tidyverse)
+data <- iris
+
+# Question 1: Continuous X, Continuous Y
+```
+
+```{r}
+conX_conY <- ggplot(data = data) +
+  aes(x = Sepal.Length, y = Sepal.Width) +
+  geom_point() + 
+  geom_smooth(method = "lm")
+print(conX_conY)
+
+```
+
+# Question 2: Discrete X, Continuous Y
+
+```{r}
+
+
+disXconY <- ggplot(data = data) +
+  aes(x = Species, y = Petal.Length) +
+  geom_boxplot(fill = "blue", color = "red")
+
+disXconY
+```
+
+# Question 3: Continuous X, Discrete Y
+```{r}
+conX_disY <- data |>
+    filter(data$Species != "virginica") |>
+    mutate("SpeciesBinary" = Species == "setosa") 
+
+conX_disY$SpeciesBinary <- as.numeric(conX_disY$SpeciesBinary)
+
+con_dis <- ggplot(data = conX_disY) +
+    aes(x = Sepal.Length , y = SpeciesBinary) +
+    geom_point() +
+    stat_smooth(position = "jitter", method = "glm", method.args = list(family = "binomial"))
+
+print(con_dis)
+```
+
+# Question 4: Discrete X, Discrete Y
+```{r}
+disX_disY <- data |>
+    mutate(data, newPetal = Petal.Length >= 3)
+x_treatment <- disX_disY$Species
+y_outcome <- disX_disY$newPetal
+summary_data <- data.frame(x_treatment, y_outcome)
+
+disXdisY <- ggplot(data = summary_data) +
+  aes(x = x_treatment) +
+  geom_bar(aes(fill = as.factor(y_outcome)))
+
+print(disXdisY)
+```
+

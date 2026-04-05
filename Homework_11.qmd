@@ -1,0 +1,96 @@
+---
+title: "Homework 11"
+format: html
+---
+
+```{python}
+
+import numpy as np
+import pandas as pd
+# Make a list
+myList = ["Olukayode",2,[1,2,3,4,5], 5,4,4, True, "blue", 3.142]
+Third_element = myList[2]
+print("Third_element is", Third_element)
+listWithinlist = myList[2][1]
+print("Third element of inner list is", listWithinlist)
+
+# Append a new element to the list
+myList.append("Arowosegbe")
+print("Append:", myList)
+
+# Remove an element from the list
+myList.remove("blue")
+print("Remove:", myList)
+
+# Pop an element to the list
+popped_item = myList.pop()
+print("Popped item:", popped_item)
+print("Pop:", myList)
+```
+
+```{python}
+# Create a dictionary with at least 5 key-value pairs
+myDict = {
+    "name": "Alice",
+    "age": 25,
+    "school": "New York University",
+    "is_student": True,
+    "major": "Biology"
+}
+
+myDict = dict(first = "Thomas",last = "Chidinma", age = 25, town= "Winooski", level = "Senior")
+print(myDict)
+# Extract all keys
+keys = myDict.keys()
+print("Keys:", keys)
+
+# Extract all values
+values = myDict.values()
+print("Values:", values)
+
+#  Use two dictionary methods
+
+#The get method
+age_value = myDict.get("age") #This will retrieve the value associated with the key "age"
+print("Using get():", age_value)
+
+# The pop method
+removed_item = myDict.pop("town") #removes the key "town" from the dictionary and returns its value
+print("Removed item:", removed_item)
+
+# Add a new element to the dictionary
+myDict["retired"] = False
+print("Added new element:", myDict)
+
+# Remove a different element
+del myDict["level"]
+print("Deleted 'rank':", myDict)
+```
+
+```{python}
+from numpy import random
+
+# Create a numpy array of length 100 with values between 0 and 1
+arr1 = np.random.rand(100)
+
+# Extract the last 10 elements using negative indexing
+last_10 = arr1[-10: -1]
+print("Last 10 elements:", last_10)
+
+# Convert numeric floats to strings and back to floats
+arr_str = arr1.astype(str)         # Convert to strings
+arr_float = arr_str.astype(float)  # Convert back to floats
+print("First 5 elements after conversion:", arr_float[:5])
+
+# Reshape arr1 into a 10x10 2D array
+arr2D = arr1.reshape(10, 10)
+print("arr2D shape:", arr2D.shape)
+
+# Create a 10x10 binary array with probability 0.2 for 1s and 0.8 for 0s
+arr_bin = np.random.choice([0, 1], size=(10, 10), p=[0.8, 0.2])
+print("Binary array:\n", arr_bin)
+
+# Stack arr2D and arr_bin into a 10x10x2 3D array
+data_cube = np.stack((arr2D, arr_bin), axis=-1)
+print("3D data cube shape is:", data_cube.shape)
+```
