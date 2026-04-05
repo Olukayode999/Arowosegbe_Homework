@@ -19,3 +19,10 @@ Adding lines here
 [Homework 6](Homework_7.html)
 
 [Homework 7](Homework_8.html)
+
+[Homework 8](Homework_9.html)
+
+[Homework 9](Homework_10.html)
+
+[Homework 10](Homework_11.html)
+
