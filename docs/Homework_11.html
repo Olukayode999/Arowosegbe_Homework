@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Homework 11 – Arowosegbe Homework</title>
+<title>Homework 10 – Arowosegbe Homework</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -152,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Homework 11</h1>
+<h1 class="title">Homework 10</h1>
 </div>
 
 
@@ -169,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="b4f73cc7" class="cell" data-execution_count="1">
+<div id="cb7e423f" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a list</span></span>
@@ -200,7 +200,7 @@ Popped item: Arowosegbe
 Pop: ['Olukayode', 2, [1, 2, 3, 4, 5], 5, 4, 4, True, 3.142]</code></pre>
 </div>
 </div>
-<div id="0caf8757" class="cell" data-execution_count="2">
+<div id="ece4131b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dictionary with at least 5 key-value pairs</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>myDict <span class="op">=</span> {</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>: <span class="st">"Alice"</span>,</span>
@@ -247,7 +247,7 @@ Added new element: {'first': 'Thomas', 'last': 'Chidinma', 'age': 25, 'level': '
 Deleted 'rank': {'first': 'Thomas', 'last': 'Chidinma', 'age': 25, 'retired': False}</code></pre>
 </div>
 </div>
-<div id="fc7494fc" class="cell" data-execution_count="3">
+<div id="51fd4816" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> random</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a numpy array of length 100 with values between 0 and 1</span></span>
@@ -274,21 +274,21 @@ Deleted 'rank': {'first': 'Thomas', 'last': 'Chidinma', 'age': 25, 'retired': Fa
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>data_cube <span class="op">=</span> np.stack((arr2D, arr_bin), axis<span class="op">=-</span><span class="dv">1</span>)</span>
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"3D data cube shape is:"</span>, data_cube.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Last 10 elements: [0.72834625 0.77376492 0.55921194 0.11482872 0.44305595 0.50576283
- 0.25265976 0.9170319  0.64347426]
-First 5 elements after conversion: [0.63776483 0.60210491 0.84688227 0.63011596 0.92324394]
+<pre><code>Last 10 elements: [0.70695688 0.86353693 0.74114058 0.37158215 0.6455908  0.98841201
+ 0.02274738 0.48089682 0.88067478]
+First 5 elements after conversion: [0.42461359 0.29612232 0.02371077 0.3410141  0.38899199]
 arr2D shape: (10, 10)
 Binary array:
- [[1 0 0 0 0 0 0 0 0 0]
- [0 1 0 0 0 0 1 0 0 0]
- [1 0 0 0 0 1 0 0 0 0]
- [1 0 0 0 0 0 0 1 0 1]
- [1 1 1 1 0 0 0 0 0 0]
+ [[1 0 0 0 0 0 0 1 0 0]
+ [0 0 1 0 0 0 0 0 0 1]
+ [0 0 1 0 0 0 0 0 0 0]
+ [0 0 0 1 0 0 1 0 1 1]
+ [0 1 0 0 1 0 0 0 0 0]
+ [0 1 1 1 0 0 1 0 1 1]
+ [0 0 1 0 0 0 0 0 0 1]
+ [1 0 0 0 0 0 0 1 0 0]
  [0 0 0 0 0 0 0 0 0 0]
- [0 0 0 0 0 1 0 0 0 0]
- [0 0 1 0 0 0 0 1 0 0]
- [1 0 0 1 0 0 0 0 0 0]
- [0 0 0 0 0 0 0 0 0 1]]
+ [0 1 0 0 0 0 0 0 0 1]]
 3D data cube shape is: (10, 10, 2)</code></pre>
 </div>
 </div>
