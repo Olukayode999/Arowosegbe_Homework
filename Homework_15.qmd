@@ -155,7 +155,7 @@ rf <- randomForest(
 rf
 ```
 #The Out-of-Bag (OOB) estimate of error rate is 2.93%.
-#Based on the confusion matrix for the test data, the model was highly accurate, with an overall accuracy of 0.9902913 (approx. 99%)
+#Based on the confusion matrix for the test data, the model was highly accurate, with an overall accuracy of approx. 99%.
 ```{r}
 # Predictions
 pred <- predict(rf, newdata = test)
