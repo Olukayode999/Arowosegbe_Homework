@@ -112,9 +112,9 @@ ggplot(pred_data, aes(x = year, y = pred_pop, color = continent)) +
   theme_minimal() +
 
   labs(
-    title = "Population growth Over Time Across Continents",
+    title = "Population Growth Over Time Across Continents",
     x = "Year",
-    y = "Predicted Population",
+    y = "Population",
     color = "Continent"
   )
 
