@@ -1,0 +1,169 @@
+---
+title: "Homework 14"
+format: html
+---
+
+```{r}
+# For reproducible results
+set.seed(1)
+# Loading Packages
+library(ggplot2)
+library(dplyr)
+library(psych)        # Bartlett's test
+library(randomForest) # Random forest
+library(palmerpenguins)
+
+# Data
+data(penguins)
+
+head(penguins)
+str(penguins)
+```
+
+```{r}
+# Select only numeric columns
+penguins_num <- penguins %>%
+  select(where(is.numeric)) %>%
+  na.omit()
+
+# Species column
+penguins_species <- penguins$species
+
+# Correlation matrix
+round(cor(penguins_num), 2)
+```
+```{r}
+bart <- cortest.bartlett(cor(penguins_num), n = nrow(penguins_num))
+bart
+```
+
+```{r}
+pca <- prcomp(penguins_num, center = TRUE, scale. = TRUE)
+summary(pca)
+```
+```{r}
+eig <- pca$sdev^2
+pve <- eig / sum(eig)
+
+pca_var_table <- data.frame(
+  PC = paste0("PC", 1:length(eig)),
+  Eigenvalue = round(eig, 3),
+  PVE = round(pve, 3),
+  CumPVE = round(cumsum(pve), 3)
+)
+pca_var_table
+```
+```{r}
+plot(eig, type = "b", pch = 19,
+     xlab = "Principal component",
+     ylab = "Eigenvalue",
+     main = "Scree plot (penguins PCA)")
+```
+```{r}
+# test
+test <- function(p) sapply(1:p, function(k) sum(1/(k:p)) / p)
+te <- test(ncol(penguins_num))
+
+retain <- data.frame(
+  PC = paste0("PC", 1:length(pve)),
+  ObservedPVE = round(pve, 3),
+  test = round(te, 3),
+  Keep = pve > te
+)
+retain
+```
+
+```{r}
+head(pca$x)
+```
+```{r}
+
+penguins_clean <- penguins %>%
+  select(species, where(is.numeric)) %>%
+  na.omit()
+penguins_num <- penguins_clean %>%
+  select(-species)
+
+# Species vector
+penguins_species <- penguins_clean$species
+
+# PCA
+pca <- prcomp(penguins_num, scale. = TRUE)
+
+# PCA scores
+scores <- as.data.frame(pca$x)
+
+# Add species
+scores$Species <- penguins_species
+head(pca$x)
+pca$rotation
+```
+```{r}
+scores <- as.data.frame(pca$x)
+scores$Species <- penguins_species
+
+plt <- ggplot(scores, aes(PC1, PC2, color = Species)) +
+  geom_point(size = 2.6, alpha = 0.85) +
+  stat_ellipse() +
+  theme_minimal() +
+  labs(
+    title = "PCA on Penguins",
+    subtitle = "PCA is unsupervised; species used only for coloring"
+  )
+
+plt
+```
+
+```{r}
+man <- manova(cbind(PC1, PC2) ~ Species, data = scores)
+summary(man, test = "Pillai")
+```
+```{r}
+set.seed(60)
+id_train <- sample(seq_len(nrow(penguins)), size = 0.7 * nrow(penguins))
+train <- penguins[id_train, ]
+test  <- penguins[-id_train, ]
+
+```
+```{r}
+set.seed(100)
+
+train_ind <- sample(
+  1:nrow(penguins_clean),
+  0.7 * nrow(penguins_clean)
+)
+
+train <- penguins_clean[train_ind, ]
+test  <- penguins_clean[-train_ind, ]
+print(head(train))
+
+#Random forest model
+rf <- randomForest(
+  species ~ .,
+  data = train,
+  ntree = 500,
+  mtry = 2,
+  importance = TRUE
+)
+
+# Print model
+rf
+```
+
+```{r}
+# Predictions
+pred <- predict(rf, newdata = test)
+table(
+  Observed = test$species,
+  Predicted = pred
+)
+```
+```{r}
+acc <- mean(pred == test$species)
+acc
+```
+
+```{r}
+importance(rf)
+
+```
