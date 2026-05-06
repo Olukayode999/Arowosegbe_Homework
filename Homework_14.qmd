@@ -165,5 +165,4 @@ acc
 
 ```{r}
 importance(rf)
-
 ```
