@@ -61,8 +61,6 @@ run_sir_model <- function(
 # END FUNCTION
 ```
 
-
-
 ```{r}
 # creating parameter vectors
 beta_vec <- seq(from = 0, to = 0.5, by = 0.01)
@@ -116,8 +114,7 @@ sir_param_sweep <- function(
 # run_sir_model()
 
 testparam_sweep <- sir_param_sweep(beta_params = beta_vec, gamma_params = gamma_vec)
-
-````
+```
 
  
 Question 2
