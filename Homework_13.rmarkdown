@@ -1,0 +1,121 @@
+---
+title: "Homework 13"
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(car)
+library(lme4)
+library(glmmTMB)
+```
+```{r}
+library(gapminder)
+data("gapminder")
+glimpse(gapminder)
+```
+```{r}
+#data 
+gapminder_data<- gapminder %>%
+    mutate( 
+        country =factor(country),
+        continent = factor(continent),
+        year_since_1950 = year - 1950
+    )
+
+glimpse(gapminder_data)
+
+```
+For question 1. I asked if life expectancy improve over time at different rates across continents? Hypothesis: Life expectancy rises over time, but the pattern of that increase varies by continent. Using the gapminder dataset, I investigated whether temporal changes in life expectancy differed across continents. A linear mixed model was chosen since life expectancy is a continuous variable and the dataset contains repeated measurements from the same countries over several years. To address this repeated-measures structure, country was included as a random effect. A year-by-continent interaction term was also added to assess whether the rate of change over time varied between continents. The model results indicate that Africa (the reference continent) showed a baseline increase of approximately 0.29 years of life expectancy per year since 1950. The Americas and Asia exhibited significantly faster rates of improvement, with additional gains of roughly 0.08 and 0.16 years per year respectively, while Europe and Oceania showed slightly slower rates of increase compared to Africa. The ANOVA confirmed that year, continent, and their interaction were all highly significant (p < 0.05), meaning the rate of change in life expectancy over time was not the same across all continents. This supports the hypothesis that life expectancy trends are continent-dependent rather than following a single, consistent global trajectory.
+```{r}
+#Question 1
+
+Quest1 <- ggplot(gapminder_data, aes(x = year, y = lifeExp, color = continent)) +
+    geom_smooth(method = "lm", se = TRUE, linewidth = 2.0) +
+    geom_line(aes(group = country), alpha = 0.15) +
+    labs(
+        title = "Life Expectancy Over Time by Continent",
+        x = "Year",
+        y = "Life Expectancy",
+        color = "Continent"
+    ) +
+        theme_minimal()
+print(Quest1)
+
+```
+```{r}
+#Model
+mod1 <- lmer(
+    lifeExp ~ year_since_1950 * continent + (1| country),
+    data = gapminder_data
+)
+
+summary(mod1)
+```
+```{r}
+anova <- Anova(mod1, type = 2)
+print(anova)
+```
+For question 2, I asked if population growth vary across continents over time?
+ Hypothesis: Population generally increases over time, but the rate of that increase differs depending on the continent. To investigate this, I used the gapminder dataset to examine whether population trajectories over time differed across continents. A negative binomial generalized linear mixed model was selected given that population is a heavily right-skewed, non-Gaussian variable, which makes a standard linear model unsuitable. As in the previous analysis, country was included as a random effect to account for repeated observations per country. A year-by-continent interaction term was also incorporated to capture whether temporal population trends varied between continents. The reference continent, Africa, showed a baseline population growth rate of approximately 0.025 per year since 1950. All other continents started with higher baseline populations relative to Africa, though Oceania's difference was not statistically significant (p = 0.42). Importantly, the interaction terms revealed that the Americas, Asia, Europe, and Oceania all grew at significantly slower rates than Africa over time, with Europe showing the most pronounced reduction in growth rate (−0.019 per year). The ANOVA confirmed that year, continent, and their interaction were all statistically significant (p < 0.05), and a likelihood ratio test further confirmed that the model including the interaction fit the data significantly better than one without it (p < 0.05). This supports the hypothesis that population growth over time is not uniform across continent.
+Question 2
+```{r} 
+#Question 2
+model_pop <- glmmTMB(
+  pop ~ year_since_1950 * continent + (1 | country),
+  data = gapminder_data,
+  family = nbinom2(link = "log")
+)
+```
+```{r}
+summary(model_pop)
+
+Anova(model_pop, type = "II")
+```
+```{r}
+model_pop_no_int <- glmmTMB(
+  pop ~ year_since_1950 + continent + (1 | country),
+  data = gapminder_data,
+  family = nbinom2(link = "log")
+)
+
+anova(model_pop_no_int, model_pop)
+
+#prediction grid
+pred_data <- expand.grid(
+  year_since_1950 = seq(
+    min(gapminder_data$year_since_1950),
+    max(gapminder_data$year_since_1950),
+    length.out = 100
+  ),
+  continent = levels(gapminder_data$continent)
+)
+
+pred_data$continent <- factor(pred_data$continent,
+                              levels = levels(gapminder_data$continent))
+
+# Predicted data
+pred_data$pred_pop <- predict(
+  model_pop,
+  newdata = pred_data,
+  type = "response",
+  re.form = NA
+)
+pred_data$year <- pred_data$year_since_1950 + 1950
+
+# Plot 
+ggplot(pred_data, aes(x = year, y = pred_pop, color = continent)) +
+
+  geom_line(linewidth = 1.2) +
+
+  theme_minimal() +
+
+  labs(
+    title = "Population growth Over Time Across Continents",
+    x = "Year",
+    y = "Predicted Population",
+    color = "Continent"
+  )
+
+```
